@@ -7,7 +7,7 @@ use ApiClients\Foundation\Resource\ResourceInterface;
 
 abstract class AbstractResourceTest extends \PHPUnit_Framework_TestCase
 {
-    abstract function getClass(): string;
+    abstract public function getClass(): string;
 
     public function provideProperties()
     {
