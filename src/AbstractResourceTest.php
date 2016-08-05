@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiClients\Foundation\Tests;
+namespace ApiClients\Tools\ResourceTestUtilities;
 
 use ApiClients\Foundation\Resource\ResourceInterface;
 
