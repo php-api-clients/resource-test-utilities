@@ -7,6 +7,13 @@ use Generator;
 interface Type
 {
     /**
+     * Scalar name the type represents
+     *
+     * @return string
+     */
+    public function scalar(): string;
+
+    /**
      * Generate random data
      *
      * @param int $count Amount of rows to generate and return
