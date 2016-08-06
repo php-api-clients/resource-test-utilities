@@ -89,6 +89,9 @@ class Types
         }
     }
 
+    /**
+     * Reset state
+     */
     public static function reset()
     {
         self::$types = [];
