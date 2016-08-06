@@ -14,8 +14,8 @@ use TypeError;
 
 abstract class AbstractResourceTest extends TestCase
 {
-    abstract function getClass(): string;
-    abstract function getNamespace(): string;
+    abstract public function getClass(): string;
+    abstract public function getNamespace(): string;
 
     public function provideProperties(): Generator
     {
@@ -66,8 +66,7 @@ abstract class AbstractResourceTest extends TestCase
         string $method,
         string $typeMethod,
         array $jsonTemplate
-    ): Generator
-    {
+    ): Generator {
         $json = $jsonTemplate;
         foreach ($type->$typeMethod() as $typeClass) {
             $methodType = Types::get(constant($typeClass . '::SCALAR'));
