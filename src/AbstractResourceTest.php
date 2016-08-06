@@ -54,14 +54,20 @@ abstract class AbstractResourceTest extends TestCase
             }
 
             $type = Types::get($varTag->getType());
-            yield from $this->generateTypeValues($type, $property, $typeMethod, $jsonTemplate);
+            yield from $this->generateTypeValues($type, $property, $method, $typeMethod, $jsonTemplate);
         }
     }
 
-    protected function generateTypeValues(Type $type, ReflectionProperty $property, string $method, array $jsonTemplate): Generator
+    protected function generateTypeValues(
+        Type $type,
+        ReflectionProperty $property,
+        string $method,
+        string $typeMethod,
+        array $jsonTemplate
+    ): Generator
     {
         $json = $jsonTemplate;
-        foreach ($type->$method() as $typeClass) {
+        foreach ($type->$typeMethod() as $typeClass) {
             $methodType = Types::get(constant($typeClass . '::SCALAR'));
             foreach ($methodType->generate(25) as $value) {
                 $json[$property->getName()] = $value;
