@@ -15,9 +15,9 @@
     "phpdocumentor/reflection-docblock": "^3.0 || ^2.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.2.3",
     "squizlabs/php_codesniffer": "^2.6",
-    "phake/phake": "^2.3"
+    "phake/phake": "^2.3",
+    "phpunit/phpunit": "^5.5"
   },
   "suggest": {
     "api-clients/resource-generator": "Easy wireframing of resources"
