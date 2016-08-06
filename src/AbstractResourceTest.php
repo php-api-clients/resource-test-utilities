@@ -46,15 +46,16 @@ abstract class AbstractResourceTest extends TestCase
             }
 
             $varTag = $varTag[0];
-            if ($varTag->getType() === '') {
+            $scalar = (string)$varTag->getType();
+            if ($scalar === '') {
                 continue;
             }
 
-            if (!Types::has($varTag->getType())) {
+            if (!Types::has($scalar)) {
                 continue;
             }
 
-            $type = Types::get($varTag->getType());
+            $type = Types::get($scalar);
             yield from $this->generateTypeValues($type, $property, $method, $typeMethod, $jsonTemplate);
         }
     }
