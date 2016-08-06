@@ -13,8 +13,8 @@ use ReflectionProperty;
 
 abstract class AbstractResourceTest extends TestCase
 {
-    abstract function getClass(): string;
-    abstract function getNamespace(): string;
+    abstract public function getClass(): string;
+    abstract public function getNamespace(): string;
 
     public function provideProperties(): Generator
     {
