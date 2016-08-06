@@ -10,6 +10,7 @@ use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
 use ReflectionClass;
 use ReflectionProperty;
+use TypeError;
 
 abstract class AbstractResourceTest extends TestCase
 {
@@ -116,6 +117,7 @@ abstract class AbstractResourceTest extends TestCase
 
     /**
      * @dataProvider providePropertiesIncompatible
+     * @expectedException TypeError
      */
     public function testPropertiesIncompatible(string $property, string $method, Type $type, array $json, $value)
     {
