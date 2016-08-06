@@ -28,9 +28,6 @@ abstract class AbstractResourceTest extends TestCase
 
     public function providePropertiesGenerator(string $typeMethod): Generator
     {
-        foreach (Types::types() as $t) {
-            var_export($t);
-        }
         $class = new ReflectionClass($this->getClass());
 
         $jsonTemplate = [];
@@ -95,7 +92,7 @@ abstract class AbstractResourceTest extends TestCase
     /**
      * @dataProvider provideProperties
      */
-    public function testProperties(string $property, string $method, Type $type, array $json, mixed $value)
+    public function testProperties(string $property, string $method, Type $type, array $json, $value)
     {
         $class = $this->getClass();
         $resource = $this->hydrate(
@@ -116,7 +113,6 @@ abstract class AbstractResourceTest extends TestCase
      */
     public function testPropertiesIncompatible(string $property, string $method, Type $type, array $json, $value)
     {
-        var_export([$property, $method, $type, $json, $value]);
         $class = $this->getClass();
         $resource = $this->hydrate(
             str_replace(
