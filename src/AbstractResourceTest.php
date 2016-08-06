@@ -17,9 +17,6 @@ abstract class AbstractResourceTest extends TestCase
 
     public function provideProperties(): Generator
     {
-        foreach (self::types() as $t) {
-        }
-
         $jsonTemplate = [];
         $class = new ReflectionClass($this->getClass());
         foreach ($class->getProperties() as $property) {
@@ -44,10 +41,11 @@ abstract class AbstractResourceTest extends TestCase
             $json = $jsonTemplate;
             foreach (Types::get($varTag->getType())->generate(25) as $value) {
                 $json[$property->getName()] = $value;
+                $type = Types::has($varTag->getType());
                 yield [
                     $property->getName(), // Name of the property to assign data to
                     $method,              // Method to call verifying that data
-                    $varTag->getType(),  // The different types of data assiciated with this field
+                    $type,                // The different types of data assiciated with this field
                     $json,                // JSON to use during testing
                     $value,               // Value to check against
                 ];
@@ -71,7 +69,7 @@ abstract class AbstractResourceTest extends TestCase
     /**
      * @dataProvider provideProperties
      */
-    public function testProperties($property, $method, $type, $json, $value)
+    public function testProperties(string $property, string $method, Type $type, array $json, mixed $value)
     {
         $class = $this->getClass();
         $resource = $this->hydrate(
@@ -84,7 +82,7 @@ abstract class AbstractResourceTest extends TestCase
             'Async'
         );
         $this->assertSame($value, $resource->{$method}());
-        $this->assertInternalType($type, $resource->{$method}());
+        $this->assertInternalType($type->scalar(), $resource->{$method}());
     }
 
     public function testInterface()
