@@ -69,7 +69,7 @@ abstract class AbstractResourceTest extends TestCase
         $json = $jsonTemplate;
         foreach ($type->$typeMethod() as $typeClass) {
             $methodType = Types::get(constant($typeClass . '::SCALAR'));
-            foreach ($methodType->generate(25) as $value) {
+            foreach ($methodType->generate(2500) as $value) {
                 $json[$property->getName()] = $value;
                 yield [
                     $property->getName(), // Name of the property to assign data to
