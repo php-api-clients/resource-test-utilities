@@ -39,6 +39,10 @@ class IntType extends AbstractType implements Type
      */
     public function incompatible(): Generator
     {
+
+        yield BoolType::class;
+        yield FloatType::class;
         yield StringType::class;
+        yield DoubleType::class;
     }
 }

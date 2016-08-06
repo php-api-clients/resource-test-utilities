@@ -39,6 +39,9 @@ class StringType extends AbstractType implements Type
      */
     public function incompatible(): Generator
     {
+        yield BoolType::class;
         yield IntType::class;
+        yield FloatType::class;
+        yield DoubleType::class;
     }
 }

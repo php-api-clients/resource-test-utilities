@@ -40,5 +40,8 @@ class BoolType extends AbstractType implements Type
     public function incompatible(): Generator
     {
         yield IntType::class;
+        yield FloatType::class;
+        yield StringType::class;
+        yield DoubleType::class;
     }
 }

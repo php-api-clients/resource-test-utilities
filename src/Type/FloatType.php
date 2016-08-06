@@ -39,6 +39,8 @@ class FloatType extends AbstractType implements Type
      */
     public function incompatible(): Generator
     {
+        yield BoolType::class;
+        yield IntType::class;
         yield StringType::class;
     }
 }
