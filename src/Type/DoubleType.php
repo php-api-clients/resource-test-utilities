@@ -4,7 +4,7 @@ namespace ApiClients\Tools\ResourceTestUtilities\Type;
 
 use ApiClients\Tools\ResourceTestUtilities\Type;
 
-class Double_ extends Float_ implements Type
+class DoubleType extends FloatType implements Type
 {
     const SCALAR = 'double';
 }

@@ -2,17 +2,17 @@
 
 namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
-use ApiClients\Tools\ResourceTestUtilities\Type\Float_;
+use ApiClients\Tools\ResourceTestUtilities\Type\BoolType;
 
-class Float_Test extends AbstractTypeTest
+class BoolTypeTest extends AbstractTypeTest
 {
     public function getType(): string
     {
-        return 'float';
+        return 'bool';
     }
 
     public function getClass(): string
     {
-        return Float_::class;
+        return BoolType::class;
     }
 }

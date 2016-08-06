@@ -2,17 +2,17 @@
 
 namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
-use ApiClients\Tools\ResourceTestUtilities\Type\Bool_;
+use ApiClients\Tools\ResourceTestUtilities\Type\DoubleType;
 
-class Bool_Test extends AbstractTypeTest
+class DoubleTypeTest extends AbstractTypeTest
 {
     public function getType(): string
     {
-        return 'bool';
+        return 'double';
     }
 
     public function getClass(): string
     {
-        return Bool_::class;
+        return DoubleType::class;
     }
 }

@@ -5,7 +5,7 @@ namespace ApiClients\Tools\ResourceTestUtilities\Type;
 use ApiClients\Tools\ResourceTestUtilities\Type;
 use Generator;
 
-class Bool_ extends AbstractType implements Type
+class BoolType extends AbstractType implements Type
 {
     const SCALAR = 'bool';
 
@@ -39,6 +39,6 @@ class Bool_ extends AbstractType implements Type
      */
     public function incompatible(): Generator
     {
-        yield Int_::class;
+        yield IntType::class;
     }
 }

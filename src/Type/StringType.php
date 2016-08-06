@@ -5,9 +5,9 @@ namespace ApiClients\Tools\ResourceTestUtilities\Type;
 use ApiClients\Tools\ResourceTestUtilities\Type;
 use Generator;
 
-class Float_ extends AbstractType implements Type
+class StringType extends AbstractType implements Type
 {
-    const SCALAR = 'float';
+    const SCALAR = 'string';
 
     /**
      * Generate random data
@@ -18,7 +18,7 @@ class Float_ extends AbstractType implements Type
     public function generate(int $count = 100): Generator
     {
         for ($i = 0; $i < $count; $i++) {
-            yield microtime(true);
+            yield (string)mt_rand($i, $count * mt_rand($i, $count));
         }
     }
 
@@ -39,6 +39,6 @@ class Float_ extends AbstractType implements Type
      */
     public function incompatible(): Generator
     {
-        yield String_::class;
+        yield IntType::class;
     }
 }

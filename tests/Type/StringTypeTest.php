@@ -2,17 +2,17 @@
 
 namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
-use ApiClients\Tools\ResourceTestUtilities\Type\Int_;
+use ApiClients\Tools\ResourceTestUtilities\Type\StringType;
 
-class Int_Test extends AbstractTypeTest
+class StringTypeTest extends AbstractTypeTest
 {
     public function getType(): string
     {
-        return 'int';
+        return 'string';
     }
 
     public function getClass(): string
     {
-        return Int_::class;
+        return StringType::class;
     }
 }

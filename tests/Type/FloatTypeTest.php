@@ -2,17 +2,17 @@
 
 namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
-use ApiClients\Tools\ResourceTestUtilities\Type\String_;
+use ApiClients\Tools\ResourceTestUtilities\Type\FloatType;
 
-class String_Test extends AbstractTypeTest
+class FloatTypeTest extends AbstractTypeTest
 {
     public function getType(): string
     {
-        return 'string';
+        return 'float';
     }
 
     public function getClass(): string
     {
-        return String_::class;
+        return FloatType::class;
     }
 }

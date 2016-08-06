@@ -5,9 +5,9 @@ namespace ApiClients\Tools\ResourceTestUtilities\Type;
 use ApiClients\Tools\ResourceTestUtilities\Type;
 use Generator;
 
-class String_ extends AbstractType implements Type
+class IntType extends AbstractType implements Type
 {
-    const SCALAR = 'string';
+    const SCALAR = 'int';
 
     /**
      * Generate random data
@@ -18,7 +18,7 @@ class String_ extends AbstractType implements Type
     public function generate(int $count = 100): Generator
     {
         for ($i = 0; $i < $count; $i++) {
-            yield (string)mt_rand($i, $count * mt_rand($i, $count));
+            yield mt_rand($i, $count * mt_rand($i, $count));
         }
     }
 
@@ -39,6 +39,6 @@ class String_ extends AbstractType implements Type
      */
     public function incompatible(): Generator
     {
-        yield Int_::class;
+        yield StringType::class;
     }
 }

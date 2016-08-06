@@ -2,17 +2,17 @@
 
 namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
-use ApiClients\Tools\ResourceTestUtilities\Type\Double_;
+use ApiClients\Tools\ResourceTestUtilities\Type\IntType;
 
-class Double_Test extends AbstractTypeTest
+class IntTypeTest extends AbstractTypeTest
 {
     public function getType(): string
     {
-        return 'double';
+        return 'int';
     }
 
     public function getClass(): string
     {
-        return Double_::class;
+        return IntType::class;
     }
 }
