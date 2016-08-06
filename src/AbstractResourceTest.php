@@ -114,7 +114,7 @@ abstract class AbstractResourceTest extends TestCase
     /**
      * @dataProvider providePropertiesIncompatible
      */
-    public function testPropertiesIncompatible(string $property, string $method, Type $type, array $json, mixed $value)
+    public function testPropertiesIncompatible(string $property, string $method, Type $type, array $json, $value)
     {
         var_export([$property, $method, $type, $json, $value]);
         $class = $this->getClass();
