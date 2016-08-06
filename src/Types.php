@@ -79,7 +79,7 @@ class Types
      * A wee bit hacky, but this ensures that when ever `has` or `get` is called before `types`
      * all types are detected and available for `has` and `get`.
      */
-    protected function ensureTypes()
+    protected static function ensureTypes()
     {
         if (self::$doneScanning && count(self::$types) > 0) {
             return;
