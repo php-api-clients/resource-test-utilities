@@ -131,7 +131,10 @@ abstract class AbstractResourceTest extends TestCase
             $json,
             'Async'
         );
-        $this->assertSame($value, $resource->{$method}());
+
+        if ($value !== $resource->{$method}()) {
+            throw new TypeError();
+        }
     }
 
     public function testInterface()
