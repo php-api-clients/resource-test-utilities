@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace ApiClients\Tools\ResourceTestUtilities;
 
+use ApiClients\Foundation\Hydrator\Factory;
+use ApiClients\Foundation\Hydrator\Options;
 use GeneratedHydrator\Configuration;
-use Phake;
-use ApiClients\Foundation\Transport\Client;
-use ApiClients\Foundation\Transport\Hydrator;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -68,10 +67,10 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     public function hydrate($class, $json, $namespace)
     {
-        return (new Hydrator(Phake::mock(Client::class), [
-            'resource_namespace' => $namespace,
-            'resource_hydrator_cache_dir' => $this->getTmpDir(),
-            'resource_hydrator_namespace' => $this->getRandomNameSpace(),
-        ]))->hydrateFQCN($class, $json);
+        return Factory::create([
+            Options::NAMESPACE => $namespace,
+            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
+            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
+        ])->hydrateFQCN($class, $json);
     }
 }
