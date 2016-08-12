@@ -5,10 +5,11 @@ namespace ApiClients\Tools\ResourceTestUtilities;
 
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Options;
-use GeneratedHydrator\Configuration;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
+    const DEFAULT_GENERATED_CLASS_NAMESPACE = 'GHGC_%s';
+
     /**
      * @var string
      */
@@ -22,9 +23,13 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->tmpDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('api-clients-tests-') . DIRECTORY_SEPARATOR;
+        $crc32 = crc32(get_class($this));
+        $this->tmpDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('act-' . $crc32, true) . DIRECTORY_SEPARATOR;
         mkdir($this->tmpDir, 0777, true);
-        $this->tmpNamespace = Configuration::DEFAULT_GENERATED_CLASS_NAMESPACE . uniqid('ApiClientsTestNamespace');
+        $this->tmpNamespace = sprintf(
+            static::DEFAULT_GENERATED_CLASS_NAMESPACE,
+            crc32(uniqid((string)$crc32, true))
+        );
     }
 
     public function tearDown()
