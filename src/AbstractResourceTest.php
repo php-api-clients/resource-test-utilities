@@ -16,6 +16,7 @@ use TypeError;
 
 abstract class AbstractResourceTest extends TestCase
 {
+    abstract public function getSyncAsync(): string;
     abstract public function getClass(): string;
     abstract public function getNamespace(): string;
 
