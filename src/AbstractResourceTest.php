@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace ApiClients\Tools\ResourceTestUtilities;
 
+use ApiClients\Foundation\Hydrator\AnnotationInterface;
+use ApiClients\Foundation\Hydrator\Annotations\Rename;
 use ApiClients\Foundation\Resource\ResourceInterface;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Inflector\Inflector;
-use Generator;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
 use ReflectionClass;
@@ -17,23 +19,31 @@ abstract class AbstractResourceTest extends TestCase
     abstract public function getClass(): string;
     abstract public function getNamespace(): string;
 
-    public function provideProperties(): Generator
+    public function provideProperties(): array
     {
-        yield from $this->providePropertiesGenerator('compatible');
+        return $this->providePropertiesGenerator('compatible');
     }
 
-    public function providePropertiesIncompatible(): Generator
+    public function providePropertiesIncompatible(): array
     {
-        yield from $this->providePropertiesGenerator('incompatible');
+        return $this->providePropertiesGenerator('incompatible');
     }
 
-    public function providePropertiesGenerator(string $typeMethod): Generator
+    public function providePropertiesGenerator(string $typeMethod): array
     {
+        $yield = [];
         $class = new ReflectionClass($this->getClass());
 
         $jsonTemplate = [];
         foreach ($class->getProperties() as $property) {
-            $jsonTemplate[$property->getName()] = '';
+            $key = $property->getName();
+            $renamed = self::GetAnnotation($property->getDeclaringClass()->getName(), Rename::class);
+
+            if ($renamed instanceof Rename && $renamed->has($key)) {
+                $key = $renamed->get($key);
+            }
+
+            $jsonTemplate[$key] = '';
         }
 
         foreach ($class->getProperties() as $property) {
@@ -56,8 +66,10 @@ abstract class AbstractResourceTest extends TestCase
             }
 
             $type = Types::get($scalar);
-            yield from $this->generateTypeValues($type, $property, $method, $typeMethod, $jsonTemplate);
+            $yield += $this->generateTypeValues($type, $property, $method, $typeMethod, $jsonTemplate);
         }
+
+        return $yield;
     }
 
     protected function generateTypeValues(
@@ -66,21 +78,32 @@ abstract class AbstractResourceTest extends TestCase
         string $method,
         string $typeMethod,
         array $jsonTemplate
-    ): Generator {
+    ): array {
+        $yield = [];
         $json = $jsonTemplate;
         foreach ($type->$typeMethod() as $typeClass) {
             $methodType = Types::get(constant($typeClass . '::SCALAR'));
-            foreach ($methodType->generate(33) as $value) {
-                $json[$property->getName()] = $value;
-                yield [
+            foreach ($methodType->generate(1) as $value) {
+                $key = $property->getName();
+
+                $renamed = self::GetAnnotation($property->getDeclaringClass()->getName(), Rename::class);
+                if ($renamed instanceof Rename && $renamed->has($key)) {
+                    $key = $renamed->get($key);
+                }
+
+                $json[$key] = $value;
+
+                $yield[] = [
                     $property->getName(), // Name of the property to assign data to
                     $method,              // Method to call verifying that data
-                    $type,                // The different types of data assiciated with this field
+                    $type,                // The different types of data associated with this field
                     $json,                // JSON to use during testing
                     $value,               // Value to check against
                 ];
             }
         }
+
+        return $yield;
     }
 
     /**
@@ -94,6 +117,40 @@ abstract class AbstractResourceTest extends TestCase
         }
 
         return new DocBlock($docBlockContents);
+    }
+
+    /**
+     * @param string $class
+     * @param string $annotationClass
+     * @return null|AnnotationInterface
+     */
+    protected static function getAnnotation(string $class, string $annotationClass)
+    {
+        $annotationReader = new AnnotationReader();
+
+        $annotation = $annotationReader
+            ->getClassAnnotation(
+                new ReflectionClass($class),
+                $annotationClass
+            )
+        ;
+
+        if (get_class($annotation) === $annotationClass) {
+            return $annotation;
+        }
+
+        $class = get_parent_class($class);
+
+        if ($class === false) {
+            return null;
+        }
+
+        return $annotationReader
+            ->getClassAnnotation(
+                new ReflectionClass($class),
+                $annotationClass
+            )
+            ;
     }
 
     /**
@@ -135,6 +192,8 @@ abstract class AbstractResourceTest extends TestCase
         if ($value !== $resource->{$method}()) {
             throw new TypeError();
         }
+
+        $this->fail('We should not reach this');
     }
 
     public function testInterface()
