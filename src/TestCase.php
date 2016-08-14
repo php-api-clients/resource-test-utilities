@@ -74,8 +74,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     {
         return Factory::create([
             Options::NAMESPACE => $namespace,
-            Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
-            Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
         ])->hydrateFQCN($class, $json);
     }
 }
