@@ -67,7 +67,9 @@ abstract class AbstractResourceTest extends TestCase
             }
 
             $type = Types::get($scalar);
-            $yield += $this->generateTypeValues($type, $property, $method, $typeMethod, $jsonTemplate);
+            foreach ($this->generateTypeValues($type, $property, $method, $typeMethod, $jsonTemplate) as $item) {
+                $yield[] = $item;
+            }
         }
 
         return $yield;
