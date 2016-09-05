@@ -86,7 +86,7 @@ abstract class AbstractResourceTest extends TestCase
         $json = $jsonTemplate;
         foreach ($type->$typeMethod() as $typeClass) {
             $methodType = Types::get(constant($typeClass . '::SCALAR'));
-            foreach ($methodType->generate(1) as $value) {
+            foreach ($methodType->generate(3) as $value) {
                 $key = $property->getName();
 
                 $renamed = self::GetAnnotation($property->getDeclaringClass()->getName(), Rename::class);
