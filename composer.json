@@ -1,6 +1,8 @@
 {
   "name": "api-clients/resource-test-utilities",
   "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "Cees-Jan Kiewiet",
@@ -9,17 +11,17 @@
   ],
   "require": {
     "php": "^7.0",
-    "doctrine/annotations": "^1.2",
-    "doctrine/inflector": "^1.1",
     "api-clients/foundation": "dev-master",
     "api-clients/hydrator": "dev-master",
     "api-clients/resource": "dev-master",
+    "doctrine/annotations": "^1.2",
+    "doctrine/inflector": "^1.1",
     "phpdocumentor/reflection-docblock": "^3.0 || ^2.0"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^2.6",
     "phake/phake": "^2.3",
-    "phpunit/phpunit": "^5.5"
+    "phpunit/phpunit": "^5.5",
+    "squizlabs/php_codesniffer": "^2.6"
   },
   "suggest": {
     "api-clients/resource-generator": "Easy wireframing of resources"
@@ -33,5 +35,8 @@
     "psr-4": {
       "ApiClients\\Tests\\Tools\\ResourceTestUtilities\\": "tests/"
     }
+  },
+  "config": {
+    "sort-packages": true
   }
 }
