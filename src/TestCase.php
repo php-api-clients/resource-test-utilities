@@ -5,8 +5,9 @@ namespace ApiClients\Tools\ResourceTestUtilities;
 
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Options;
+use ApiClients\Tools\TestUtilities\TestCase as BaseTestCase;
 
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends BaseTestCase
 {
     const DEFAULT_GENERATED_CLASS_NAMESPACE = 'GHGC_%s';
 

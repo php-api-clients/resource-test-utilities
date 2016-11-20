@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f53f3857819e7971684e3a853f2d24fd",
-    "content-hash": "86416000684879715d55bfb16e3efa2f",
+    "hash": "cd088c1333928b183b0e7c6d0ce5719c",
+    "content-hash": "d1159ff61b601ad38b0cddff0b26616b",
     "packages": [
         {
             "name": "api-clients/command-bus",
@@ -4429,7 +4429,8 @@
     "stability-flags": {
         "api-clients/foundation": 20,
         "api-clients/hydrator": 20,
-        "api-clients/resource": 20
+        "api-clients/resource": 20,
+        "api-clients/test-utilities": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
