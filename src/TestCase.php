@@ -21,6 +21,7 @@ abstract class TestCase extends BaseTestCase
     {
         $loop = LoopFactory::create();
         $container = ContainerBuilder::buildDevContainer();
+        $container->set(LoopInterface::class, $loop);
         $container->set(CommandBus::class, $this->createCommandBus($loop));
         return Factory::create($container, [
             Options::NAMESPACE => '',
