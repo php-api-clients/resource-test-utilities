@@ -22,12 +22,12 @@ abstract class AbstractResourceTest extends TestCase
 
     public function provideProperties(): array
     {
-        return $this->providePropertiesGenerator('compatible');
+        return [[$this->providePropertiesGenerator('compatible')]];
     }
 
     public function providePropertiesIncompatible(): array
     {
-        return $this->providePropertiesGenerator('incompatible');
+        return [[$this->providePropertiesGenerator('incompatible')]];
     }
 
     public function providePropertiesGenerator(string $typeMethod): array
@@ -159,44 +159,55 @@ abstract class AbstractResourceTest extends TestCase
     /**
      * @dataProvider provideProperties
      */
-    public function testProperties(string $property, string $method, Type $type, array $json, $value)
+    public function testProperties($args)
     {
-        $class = $this->getClass();
-        $resource = $this->hydrate(
-            str_replace(
-                $this->getNamespace(),
-                $this->getNamespace() . '\\Async',
-                $class
-            ),
-            $json,
-            'Async'
-        );
-        $this->assertSame($value, $resource->{$method}());
-        $this->assertInternalType($type->scalar(), $resource->{$method}());
+        foreach ($args as $arg) {
+            list ($property, $method, $type, $json, $value) = $arg;
+            $class = $this->getClass();
+            $resource = $this->hydrate(
+                str_replace(
+                    $this->getNamespace(),
+                    $this->getNamespace() . '\\Async',
+                    $class
+                ),
+                $json,
+                'Async'
+            );
+            $this->assertSame($value, $resource->{$method}());
+            $this->assertInternalType($type->scalar(), $resource->{$method}());
+        }
     }
 
     /**
      * @dataProvider providePropertiesIncompatible
-     * @expectedException TypeError
      */
-    public function testPropertiesIncompatible(string $property, string $method, Type $type, array $json, $value)
+    public function testPropertiesIncompatible($args)
     {
-        $class = $this->getClass();
-        $resource = $this->hydrate(
-            str_replace(
-                $this->getNamespace(),
-                $this->getNamespace() . '\\Async',
-                $class
-            ),
-            $json,
-            'Async'
-        );
+        foreach ($args as $arg) {
+            list ($property, $method, $type, $json, $value) = $arg;
 
-        if ($value !== $resource->{$method}()) {
-            throw new TypeError();
+            try {
+                $class = $this->getClass();
+                $resource = $this->hydrate(
+                    str_replace(
+                        $this->getNamespace(),
+                        $this->getNamespace() . '\\Async',
+                        $class
+                    ),
+                    $json,
+                    'Async'
+                );
+
+                if ($value !== $resource->{$method}()) {
+                    throw new TypeError();
+                }
+            } catch (\Throwable $t) {
+                $this->assertTrue(true);
+                continue;
+            }
+
+            $this->fail('We should not reach this');
         }
-
-        $this->fail('We should not reach this');
     }
 
     public function testInterface()
