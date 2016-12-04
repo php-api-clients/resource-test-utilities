@@ -13,16 +13,13 @@
     "php": "^7.0",
     "api-clients/foundation": "dev-master",
     "api-clients/hydrator": "dev-master",
-    "api-clients/resource": "dev-master",
-    "api-clients/test-utilities": "dev-master",
+    "api-clients/resource": "^1.0",
     "doctrine/annotations": "^1.2",
     "doctrine/inflector": "^1.1",
     "phpdocumentor/reflection-docblock": "^3.0 || ^2.0"
   },
   "require-dev": {
-    "phake/phake": "^2.3",
-    "phpunit/phpunit": "^5.5",
-    "squizlabs/php_codesniffer": "^2.6"
+    "api-clients/test-utilities": "^1.0"
   },
   "suggest": {
     "api-clients/resource-generator": "Easy wireframing of resources"
