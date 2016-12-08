@@ -13,13 +13,13 @@
     "php": "^7.0",
     "api-clients/foundation": "dev-master",
     "api-clients/hydrator": "dev-master",
-    "api-clients/resource": "^1.0",
+    "api-clients/resource": "^2.0",
     "doctrine/annotations": "^1.2",
     "doctrine/inflector": "^1.1",
     "phpdocumentor/reflection-docblock": "^3.0 || ^2.0"
   },
   "require-dev": {
-    "api-clients/test-utilities": "^1.0"
+    "api-clients/test-utilities": "^2.0"
   },
   "suggest": {
     "api-clients/resource-generator": "Easy wireframing of resources"
