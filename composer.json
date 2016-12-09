@@ -13,7 +13,7 @@
     "php": "^7.0",
     "api-clients/foundation": "dev-master",
     "api-clients/hydrator": "dev-master",
-    "api-clients/resource": "^2.0",
+    "api-clients/resource": "^3.0",
     "doctrine/annotations": "^1.2",
     "doctrine/inflector": "^1.1",
     "phpdocumentor/reflection-docblock": "^3.0 || ^2.0"
