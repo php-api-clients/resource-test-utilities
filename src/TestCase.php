@@ -6,6 +6,7 @@ namespace ApiClients\Tools\ResourceTestUtilities;
 use ApiClients\Foundation\Hydrator\Factory;
 use ApiClients\Foundation\Hydrator\Options;
 use ApiClients\Tools\CommandBus\CommandBus;
+use ApiClients\Tools\CommandBus\CommandBusInterface;
 use ApiClients\Tools\TestUtilities\TestCase as BaseTestCase;
 use DI\ContainerBuilder;
 use League\Tactician\Handler\CommandHandlerMiddleware;
@@ -22,7 +23,7 @@ abstract class TestCase extends BaseTestCase
         $loop = LoopFactory::create();
         $container = ContainerBuilder::buildDevContainer();
         $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBus::class, $this->createCommandBus($loop));
+        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
         return Factory::create($container, [
             Options::NAMESPACE => '',
             Options::NAMESPACE_SUFFIX => $namespace,
@@ -31,7 +32,7 @@ abstract class TestCase extends BaseTestCase
         ])->hydrateFQCN($class, $json);
     }
 
-    protected function createCommandBus(LoopInterface $loop, array $map = []): CommandBus
+    protected function createCommandBus(LoopInterface $loop, array $map = []): CommandBusInterface
     {
         $commandHandlerMiddleware = new CommandHandlerMiddleware(
             new ClassNameExtractor(),
