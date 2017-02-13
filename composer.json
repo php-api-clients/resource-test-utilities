@@ -19,7 +19,7 @@
     "phpdocumentor/reflection-docblock": "^3.0 || ^2.0"
   },
   "require-dev": {
-    "api-clients/test-utilities": "^2.0"
+    "api-clients/test-utilities": "^3.0.1"
   },
   "suggest": {
     "api-clients/resource-generator": "Easy wireframing of resources"

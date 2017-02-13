@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
-abstract class AbstractTypeTest extends \PHPUnit_Framework_TestCase
+use ApiClients\Tools\ResourceTestUtilities\TestCase;
+
+abstract class AbstractTypeTest extends TestCase
 {
     abstract public function getType(): string;
     abstract public function getClass(): string;
