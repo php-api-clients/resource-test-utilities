@@ -138,6 +138,10 @@ abstract class AbstractResourceTest extends TestCase
             )
         ;
 
+        if ($annotation === null) {
+            return null;
+        }
+
         if (get_class($annotation) === $annotationClass) {
             return $annotation;
         }
