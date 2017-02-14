@@ -5,7 +5,7 @@ namespace ApiClients\Tools\ResourceTestUtilities\Type;
 use ApiClients\Tools\ResourceTestUtilities\Type;
 use Generator;
 
-class StringType extends AbstractType implements Type
+final class StringType extends AbstractType implements Type
 {
     const SCALAR = 'string';
 

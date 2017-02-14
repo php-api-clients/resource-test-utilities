@@ -4,7 +4,7 @@ namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
 use ApiClients\Tools\ResourceTestUtilities\TestCase;
 
-class FaulthyType_Test extends TestCase
+final class FaulthyType_Test extends TestCase
 {
     /**
      * @expectedException InvalidArgumentException

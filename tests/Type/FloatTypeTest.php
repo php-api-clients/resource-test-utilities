@@ -4,7 +4,7 @@ namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
 use ApiClients\Tools\ResourceTestUtilities\Type\FloatType;
 
-class FloatTypeTest extends AbstractTypeTest
+final class FloatTypeTest extends AbstractTypeTest
 {
     public function getType(): string
     {

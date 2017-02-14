@@ -39,7 +39,7 @@ abstract class AbstractTypeTest extends TestCase
         foreach ($type->generate($count) as $row) {
             $rows++;
         }
-        $this->assertSame($count, $rows);
+        self::assertSame($count, $rows);
     }
 
     public function testGenerateDefaultCount()
@@ -50,6 +50,6 @@ abstract class AbstractTypeTest extends TestCase
         foreach ($type->generate() as $row) {
             $rows++;
         }
-        $this->assertSame(100, $rows);
+        self::assertSame(100, $rows);
     }
 }

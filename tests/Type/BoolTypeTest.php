@@ -4,7 +4,7 @@ namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
 use ApiClients\Tools\ResourceTestUtilities\Type\BoolType;
 
-class BoolTypeTest extends AbstractTypeTest
+final class BoolTypeTest extends AbstractTypeTest
 {
     public function getType(): string
     {

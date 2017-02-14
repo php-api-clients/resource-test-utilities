@@ -4,7 +4,7 @@ namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
 use ApiClients\Tools\ResourceTestUtilities\Type\DoubleType;
 
-class DoubleTypeTest extends AbstractTypeTest
+final class DoubleTypeTest extends AbstractTypeTest
 {
     public function getType(): string
     {

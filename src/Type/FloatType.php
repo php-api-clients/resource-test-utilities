@@ -5,7 +5,7 @@ namespace ApiClients\Tools\ResourceTestUtilities\Type;
 use ApiClients\Tools\ResourceTestUtilities\Type;
 use Generator;
 
-class FloatType extends AbstractType implements Type
+final class FloatType extends AbstractType implements Type
 {
     const SCALAR = 'float';
 

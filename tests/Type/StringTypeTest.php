@@ -4,7 +4,7 @@ namespace ApiClients\Tests\Tools\ResourceTestUtilities\Type;
 
 use ApiClients\Tools\ResourceTestUtilities\Type\StringType;
 
-class StringTypeTest extends AbstractTypeTest
+final class StringTypeTest extends AbstractTypeTest
 {
     public function getType(): string
     {
