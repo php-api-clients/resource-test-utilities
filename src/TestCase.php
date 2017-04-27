@@ -21,10 +21,8 @@ abstract class TestCase extends BaseTestCase
     public function hydrate($class, $json, $namespace)
     {
         $loop = LoopFactory::create();
-        $container = ContainerBuilder::buildDevContainer();
-        $container->set(LoopInterface::class, $loop);
-        $container->set(CommandBusInterface::class, $this->createCommandBus($loop));
-        return Factory::create($container, [
+        $commandBus = $this->createCommandBus($loop);
+        return Factory::create($loop, $commandBus, [
             Options::NAMESPACE => '',
             Options::NAMESPACE_SUFFIX => $namespace,
             Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
