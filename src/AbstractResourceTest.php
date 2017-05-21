@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace ApiClients\Tools\ResourceTestUtilities;
 
 use ApiClients\Foundation\Hydrator\AnnotationInterface;
-use ApiClients\Foundation\Hydrator\Annotations\Rename;
+use ApiClients\Foundation\Hydrator\Annotation\Rename;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Inflector\Inflector;
