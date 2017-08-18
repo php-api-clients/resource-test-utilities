@@ -1,5 +1,6 @@
 {
   "name": "api-clients/resource-test-utilities",
+  "description": "Test utilities for resources",
   "license": "MIT",
   "authors": [
     {
