@@ -3,7 +3,6 @@
 namespace ApiClients\Tools\ResourceTestUtilities\Type;
 
 use ApiClients\Tools\ResourceTestUtilities\Type;
-use Generator;
 
 abstract class AbstractType
 {
@@ -15,7 +14,7 @@ abstract class AbstractType
     }
 
     /**
-     * Scalar name the type represents
+     * Scalar name the type represents.
      *
      * @return string
      */

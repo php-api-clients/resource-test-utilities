@@ -8,6 +8,7 @@ use ApiClients\Tools\ResourceTestUtilities\TestCase;
 abstract class AbstractTypeTest extends TestCase
 {
     abstract public function getType(): string;
+
     abstract public function getClass(): string;
 
     public function testGenerate()

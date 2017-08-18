@@ -10,9 +10,9 @@ final class BoolType extends AbstractType implements Type
     const SCALAR = 'bool';
 
     /**
-     * Generate random data
+     * Generate random data.
      *
-     * @param int $count Amount of rows to generate and return
+     * @param  int       $count Amount of rows to generate and return
      * @return Generator
      */
     public function generate(int $count = 100): Generator
@@ -23,7 +23,7 @@ final class BoolType extends AbstractType implements Type
     }
 
     /**
-     * List of types that are compatible with this type
+     * List of types that are compatible with this type.
      *
      * @return Generator
      */
@@ -33,7 +33,7 @@ final class BoolType extends AbstractType implements Type
     }
 
     /**
-     * List of types that are incompatible with this type
+     * List of types that are incompatible with this type.
      *
      * @return Generator
      */

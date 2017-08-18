@@ -24,6 +24,7 @@ final class Types
     {
         if (self::$doneScanning && count(self::$types) > 0) {
             yield from self::$types;
+
             return;
         }
 
@@ -39,7 +40,7 @@ final class Types
             $fileName = str_replace('/', '\\', $nodePath);
             $class = __NAMESPACE__ . '\\Type\\' . substr(substr($fileName, strlen($path)), 0, -4);
             if (class_exists($class) && (new ReflectionClass($class))->implementsInterface(Type::class)) {
-                $type = new $class;
+                $type = new $class();
                 self::$types[$type->scalar()] = $type;
                 yield $type;
             }
@@ -49,7 +50,7 @@ final class Types
     }
 
     /**
-     * @param string $type
+     * @param  string $type
      * @return bool
      */
     public static function has(string $type): bool
@@ -60,9 +61,9 @@ final class Types
     }
 
     /**
-     * @param string $type
-     * @return Type
+     * @param  string    $type
      * @throws Exception
+     * @return Type
      */
     public static function get(string $type): Type
     {
@@ -73,6 +74,15 @@ final class Types
         }
 
         throw new Exception('Type "' . $type . '" not found, use has to check"');
+    }
+
+    /**
+     * Reset state.
+     */
+    public static function reset()
+    {
+        self::$types = [];
+        self::$doneScanning = false;
     }
 
     /**
@@ -87,14 +97,5 @@ final class Types
 
         foreach (self::types() as $t) {
         }
-    }
-
-    /**
-     * Reset state
-     */
-    public static function reset()
-    {
-        self::$types = [];
-        self::$doneScanning = false;
     }
 }

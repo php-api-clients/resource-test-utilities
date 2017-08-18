@@ -8,7 +8,6 @@ use ApiClients\Foundation\Hydrator\Options;
 use ApiClients\Tools\CommandBus\CommandBus;
 use ApiClients\Tools\CommandBus\CommandBusInterface;
 use ApiClients\Tools\TestUtilities\TestCase as BaseTestCase;
-use DI\ContainerBuilder;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\Locator\InMemoryLocator;
@@ -22,6 +21,7 @@ abstract class TestCase extends BaseTestCase
     {
         $loop = LoopFactory::create();
         $commandBus = $this->createCommandBus($loop);
+
         return Factory::create($loop, $commandBus, [
             Options::NAMESPACE => '',
             Options::NAMESPACE_SUFFIX => $namespace,

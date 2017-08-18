@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace ApiClients\Tools\ResourceTestUtilities;
 
-use phpDocumentor\Reflection\DocBlock;
 use ReflectionClass;
 use Throwable;
 use TypeError;
@@ -11,6 +10,7 @@ use TypeError;
 abstract class AbstractEmptyResourceTest extends TestCase
 {
     abstract public function getSyncAsync(): string;
+
     abstract public function getClass(): string;
 
     public function provideProperties(): array
@@ -27,6 +27,7 @@ abstract class AbstractEmptyResourceTest extends TestCase
 
     /**
      * @dataProvider provideProperties
+     * @param mixed $args
      */
     public function testProperties($args)
     {
@@ -34,7 +35,7 @@ abstract class AbstractEmptyResourceTest extends TestCase
         $resource = new $class();
 
         foreach ($args as $arg) {
-            list ($method) = $arg;
+            list($method) = $arg;
 
             try {
                 $resource->{$method}();

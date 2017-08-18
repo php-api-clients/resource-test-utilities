@@ -29,7 +29,6 @@ final class TypesTest extends TestCase
         self::assertTrue($count > 0);
     }
 
-
     public function testHasnt()
     {
         self::assertFalse(Types::has('abc'));

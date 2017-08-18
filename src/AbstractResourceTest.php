@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace ApiClients\Tools\ResourceTestUtilities;
 
-use ApiClients\Foundation\Hydrator\AnnotationInterface;
 use ApiClients\Foundation\Hydrator\Annotation\Rename;
+use ApiClients\Foundation\Hydrator\AnnotationInterface;
 use ApiClients\Foundation\Resource\ResourceInterface;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Inflector\Inflector;
@@ -17,7 +17,9 @@ use TypeError;
 abstract class AbstractResourceTest extends TestCase
 {
     abstract public function getSyncAsync(): string;
+
     abstract public function getClass(): string;
+
     abstract public function getNamespace(): string;
 
     public function provideProperties(): array
@@ -75,6 +77,72 @@ abstract class AbstractResourceTest extends TestCase
         return $yield;
     }
 
+    /**
+     * @dataProvider provideProperties
+     * @param mixed $args
+     */
+    public function testProperties($args)
+    {
+        foreach ($args as $arg) {
+            list($property, $method, $type, $json, $value) = $arg;
+            $class = $this->getClass();
+            $resource = $this->hydrate(
+                str_replace(
+                    $this->getNamespace(),
+                    $this->getNamespace() . '\\Async',
+                    $class
+                ),
+                $json,
+                'Async'
+            );
+            $this->assertSame($value, $resource->{$method}());
+            $this->assertInternalType($type->scalar(), $resource->{$method}());
+        }
+    }
+
+    /**
+     * @dataProvider providePropertiesIncompatible
+     * @param mixed $args
+     */
+    public function testPropertiesIncompatible($args)
+    {
+        foreach ($args as $arg) {
+            list($property, $method, $type, $json, $value) = $arg;
+
+            try {
+                $class = $this->getClass();
+                $resource = $this->hydrate(
+                    str_replace(
+                        $this->getNamespace(),
+                        $this->getNamespace() . '\\Async',
+                        $class
+                    ),
+                    $json,
+                    'Async'
+                );
+
+                if ($value !== $resource->{$method}()) {
+                    throw new TypeError();
+                }
+            } catch (\Throwable $t) {
+                $this->assertTrue(true);
+                continue;
+            }
+
+            $this->fail('We should not reach this');
+        }
+    }
+
+    public function testInterface()
+    {
+        $this->assertTrue(
+            is_subclass_of(
+                $this->getClass(),
+                ResourceInterface::class
+            )
+        );
+    }
+
     protected function generateTypeValues(
         Type $type,
         ReflectionProperty $property,
@@ -123,8 +191,8 @@ abstract class AbstractResourceTest extends TestCase
     }
 
     /**
-     * @param string $class
-     * @param string $annotationClass
+     * @param  string                   $class
+     * @param  string                   $annotationClass
      * @return null|AnnotationInterface
      */
     protected static function getAnnotation(string $class, string $annotationClass)
@@ -158,69 +226,5 @@ abstract class AbstractResourceTest extends TestCase
                 $annotationClass
             )
             ;
-    }
-
-    /**
-     * @dataProvider provideProperties
-     */
-    public function testProperties($args)
-    {
-        foreach ($args as $arg) {
-            list ($property, $method, $type, $json, $value) = $arg;
-            $class = $this->getClass();
-            $resource = $this->hydrate(
-                str_replace(
-                    $this->getNamespace(),
-                    $this->getNamespace() . '\\Async',
-                    $class
-                ),
-                $json,
-                'Async'
-            );
-            $this->assertSame($value, $resource->{$method}());
-            $this->assertInternalType($type->scalar(), $resource->{$method}());
-        }
-    }
-
-    /**
-     * @dataProvider providePropertiesIncompatible
-     */
-    public function testPropertiesIncompatible($args)
-    {
-        foreach ($args as $arg) {
-            list ($property, $method, $type, $json, $value) = $arg;
-
-            try {
-                $class = $this->getClass();
-                $resource = $this->hydrate(
-                    str_replace(
-                        $this->getNamespace(),
-                        $this->getNamespace() . '\\Async',
-                        $class
-                    ),
-                    $json,
-                    'Async'
-                );
-
-                if ($value !== $resource->{$method}()) {
-                    throw new TypeError();
-                }
-            } catch (\Throwable $t) {
-                $this->assertTrue(true);
-                continue;
-            }
-
-            $this->fail('We should not reach this');
-        }
-    }
-
-    public function testInterface()
-    {
-        $this->assertTrue(
-            is_subclass_of(
-                $this->getClass(),
-                ResourceInterface::class
-            )
-        );
     }
 }
