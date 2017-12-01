@@ -93,6 +93,7 @@ abstract class AbstractResourceTest extends TestCase
                     $class
                 ),
                 $json,
+                $this->getNamespace(),
                 'Async'
             );
             $this->assertSame($value, $resource->{$method}());
@@ -118,6 +119,7 @@ abstract class AbstractResourceTest extends TestCase
                         $class
                     ),
                     $json,
+                    $this->getNamespace(),
                     'Async'
                 );
 

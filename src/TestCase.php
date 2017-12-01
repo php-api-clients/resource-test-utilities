@@ -17,14 +17,14 @@ use React\EventLoop\LoopInterface;
 
 abstract class TestCase extends BaseTestCase
 {
-    public function hydrate($class, $json, $namespace)
+    public function hydrate($class, $json, $namespace, $namespaceSuffix)
     {
         $loop = LoopFactory::create();
         $commandBus = $this->createCommandBus($loop);
 
         return Factory::create($loop, $commandBus, [
-            Options::NAMESPACE => '',
-            Options::NAMESPACE_SUFFIX => $namespace,
+            Options::NAMESPACE => $namespace,
+            Options::NAMESPACE_SUFFIX => $namespaceSuffix,
             Options::RESOURCE_CACHE_DIR => $this->getTmpDir(),
             Options::RESOURCE_NAMESPACE => $this->getRandomNameSpace(),
         ])->hydrateFQCN($class, $json);
