@@ -15,7 +15,7 @@
     "api-clients/resource": "^3.0",
     "doctrine/annotations": "^1.2",
     "doctrine/inflector": "^1.1",
-    "phpdocumentor/reflection-docblock": "^3.0 || ^2.0"
+    "phpdocumentor/reflection-docblock": "^3.0 || ^2.0 || ^4.0"
   },
   "require-dev": {
     "api-clients/test-utilities": "^4.1"
